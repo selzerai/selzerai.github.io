@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Styling the Base Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+    </style>
+    </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initialize() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,
+          center: new google.maps.LatLng(47.724254, -122.297114),
+          mapTypeId: 'roadmap',
+          styles: [
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [
+                { color: '#000000' },
+                { weight: 1.6 }
+              ]
+            }, {
+              featureType: 'road',
+              elementType: 'labels',
+              stylers: [
+                { saturation: -100 },
+                { invert_lightness: true }
+              ]
+            }, {
+              featureType: 'landscape',
+              elementType: 'geometry',
+              stylers: [
+                { hue: '#ffff00' },
+                { gamma: 1.4 },
+                { saturation: 82 },
+                { lightness: 96 }
+              ]
+            }, {
+              featureType: 'poi.school',
+              elementType: 'geometry',
+              stylers: [
+                { hue: '#fff700' },
+                { lightness: -15 },
+                { saturation: 99 }
+              ]
+            }, {
+              featureType: 'poi',
+              elementType: 'geometry',
+              stylers: [
+                { visibility: 'off' }
+              ]
+            }, {
+              featureType: 'poi.school',
+              elementType: 'geometry',
+              stylers: [
+                { visibility: 'on' },
+                { hue: '#fff700' },
+                { lightness: -15 },
+                { saturation: 99 }
+              ]
+            }
+          ]
+        });
+
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var icons = {
+          parking: {
+            icon: iconBase + 'parking_lot_maps.png'
+          },
+          library: {
+            icon: iconBase + 'library_maps.png'
+          },
+          info: {
+            icon: iconBase + 'info-i_maps.png'
+          },
+          place: {
+          icon: iconBase + 'airports.png' 
+          } 
+        };
+
+        function addMarker(feature) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: icons[feature.type].icon,
+            map: map
+          });
+        }
+
+        var features = [
+          {
+            position: new google.maps.LatLng(47.648065, -122.348731),
+            type: 'parking'
+          }, {
+            position: new google.maps.LatLng(47.707056, -122.327406),
+            type: 'parking'
+          }, {
+            position: new google.maps.LatLng(47.641704, -122.317480),
+            type: 'parking'
+          }, {
+            position: new google.maps.LatLng(47.663410, -122.298568),
+            type: 'parking'
+          },  {
+            position: new google.maps.LatLng(47.719716, -122.298113),
+            type: 'library'
+          }, {
+            position: new google.maps.LatLng(7.137377, 45.748762),
+            type: 'airports'
+          }, 
+        ];
+
+        for (var i = 0, feature; feature = features[i]; i++) {
+          addMarker(feature);
+        }
+      }
+        onload=addMarker(parking)
+        onload=addMarker(library)
+        onload=addMarker(airports)
+
+
+    </script>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZJSnBRCq069VikL7lx9P-7D20q17cBO8&callback=initialize">
+    </script>
+  </body>
+</html>

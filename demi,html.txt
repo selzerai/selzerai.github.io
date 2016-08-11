@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title> Selome: All about Demi </title>
+            <body>
+            <h1> <center> <u> First things first, Demi Lovato is my Queen </u> </center>
